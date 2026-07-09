@@ -278,3 +278,21 @@ If you want to report a bug or ask for help on the project itself:
 6. Click **Submit new issue**
 
 You need a **free GitHub account** to raise an issue. If you do not have one, click **Sign up** on GitHub first, or ask a colleague who has an account to raise it for you.
+
+---
+
+## Appendix
+
+When I built this, my laptop didn't have a copy of Publisher to play with, so I used my wife's school laptop. It didn't have PowerShell v7, so
+```
+winget install --id Microsoft.PowerShell --source winget
+```
+I wrote it using Notepad as it didn't have Emacs (rage-baiting any VS Code users here). It then complained that it wasn't digitally signed, so
+```
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+Unblock-File .\pub2pdf.ps1
+```
+Nice one.
+
+After several iterations (and then help with my favourite AI-based code generator), I tried it out on my home desktop (which, for testing purposes, is rather old, as would be the laptops of many a UK teacher). This proved invaluable, as it meant that I didn't need to install PowerShell 7, and I had a "guinea pig" of my own to experiment on.
+
