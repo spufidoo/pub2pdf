@@ -10,16 +10,25 @@ Check all of these before you start:
 
 - A **Windows** laptop or PC
 - **Microsoft Publisher** installed (the same program you use to open `.pub` files)
+- **PowerShell** — already built into Windows; you do not need to install anything extra. The `.bat` file uses the normal Windows version (`powershell.exe`), which is correct
 - Your `.pub` files saved on the computer — if they are in **OneDrive**, make sure they are downloaded locally (see [OneDrive tip](#onedrive-files) below)
 - Permission to run scripts — if your school or workplace blocks them, ask **IT support** to help with [Step 4](#step-4-if-your-computer-blocks-the-tool)
 
 ---
 
 ## Step 1: Download the tool
-
-You only need **one file**: `pub2pdf.ps1`. You will find the file here (https://github.com/spufidoo/pub2pdf.ps1/blob/main/pub2pdf.ps1). Click on the download icon on the header bar to download it.
+<!--
+You only need **one file**: `pub2pdf.ps1`. You will find the file here (https://github.com/spufidoo/pub2pdf/blob/main/pub2pdf.ps1). Click on the download icon on the header bar to download it.
 <img width="905" height="51" alt="image" src="https://github.com/user-attachments/assets/f664e7d3-2028-4022-b17a-1f6367c1a907" />
-This will download it to your Downloads folder.
+-->
+
+1. Open the project page in your web browser (your colleague will give you the link).
+2. Click the green **Code** button near the top right.
+3. Click **Download ZIP**.
+4. Open your **Downloads** folder and double-click the ZIP file.
+5. Drag **`pub2pdf.ps1`** into **Documents → pub2pdf** (create the `pub2pdf` folder if it does not exist).
+
+You do **not** need to install GitHub or create an account.
 
 ---
 
@@ -39,6 +48,16 @@ Windows may block files downloaded from the internet.
 
 You will create a small helper file so you never have to type commands yourself.
 
+### Easy option: use the template file
+
+If your download includes **`Convert my Publisher files.bat`**, you do not need to create one:
+
+1. Right-click the `.bat` file → **Edit** (or open it in Notepad)
+2. Change only the two folder paths at the top (`SOURCE` and `OUTPUT`)
+3. Save and close Notepad
+
+### Or create your own in Notepad
+
 1. Open **Notepad** (search for it in the Start menu)
 2. Copy **all** of the text inside the box below
 3. Paste it into Notepad
@@ -49,15 +68,27 @@ You will create a small helper file so you never have to type commands yourself.
 8. Name the file: **`Convert my Publisher files.bat`**
 9. Click **Save**
 
+**Important:** The `powershell.exe` line must be **one single line** in Notepad — do not split it across two lines unless you know batch files well.
+
 ### Text to copy into Notepad
 
 ```bat
 @echo off
 cd /d "%~dp0"
-powershell.exe -ExecutionPolicy Bypass -File "%~dp0pub2pdf.ps1" -SourceRoot "PUT YOUR PUBLISHER FOLDER HERE" -OutputRoot "PUT YOUR PDF FOLDER HERE" -Skip
+
+REM === EDIT THESE TWO FOLDERS ===
+set "SOURCE=PUT YOUR PUBLISHER FOLDER HERE"
+set "OUTPUT=PUT YOUR PDF FOLDER HERE"
+
+REM Optional: seconds to wait for export (600 = 10 minutes). Remove this switch to use the default (180).
+set "TIMEOUT=600"
+
+powershell.exe -ExecutionPolicy Bypass -File "%~dp0pub2pdf.ps1" -SourceRoot "%SOURCE%" -OutputRoot "%OUTPUT%" -Skip -ExportTimeoutSeconds %TIMEOUT%
+
 echo.
 echo Finished. Press any key to close this window.
 pause >nul
+
 ```
 
 ### Example paths
@@ -87,6 +118,13 @@ pause >nul
 2. Click the address bar at the top
 3. Copy the path (Ctrl+C)
 4. Paste it between the quote marks in Notepad
+
+**Important:**
+
+- **`-SourceRoot`** = the folder that contains your `.pub` files
+- **`-OutputRoot`** = a **different** folder where you want the PDFs saved (for example, create a folder called `PDFs`). Do not use the same folder as the tool itself unless you deliberately want PDFs saved beside the script
+
+If you downloaded from GitHub, you may have a folder called `pub2pdf.ps1-main`. Keep `pub2pdf.ps1` and your `.bat` file there, but point **`-SourceRoot`** at the folder that actually contains your `.pub` files, and **`-OutputRoot`** at where you want PDFs to go.
 
 ---
 
@@ -128,6 +166,22 @@ You can change the last part of the line in your `.bat` file:
 
 **Do not use `-Skip` and `-Overwrite` together.**
 
+### Longer export timeout (optional)
+
+If export seems to hang, you can allow more time (in seconds). Add this to the **end** of the same `powershell.exe` line, with a **space** before it:
+
+```bat
+-Skip -ExportTimeoutSeconds 600
+```
+
+The full line must look like one command — for example:
+
+```bat
+powershell.exe -ExecutionPolicy Bypass -File "%~dp0pub2pdf.ps1" -SourceRoot "C:\Your\Pub folder" -OutputRoot "C:\Your\PDF folder" -Skip -ExportTimeoutSeconds 600
+```
+
+There must be a **space** after `600`. Do not type `600` right next to `powershell.exe` or any other text.
+
 ---
 
 ## OneDrive files
@@ -156,7 +210,10 @@ To try a single file before converting a whole folder, ask IT or a colleague to 
 | “Publisher cannot open the file” | Open that `.pub` file manually in Publisher. If Publisher cannot open it either, the file may be damaged or not a real Publisher file |
 | Nothing happens when you double-click the `.bat` file | Make sure `pub2pdf.ps1` is in the **same folder** as the `.bat` file |
 | “Running scripts is disabled” | Ask IT support (see Step 4 alternative) |
-| PDFs missing for some files | Open the log file in the output folder and look for lines starting with `FAILED` |
+| Tool stops after `TEMP` with no progress | Check the **taskbar for Publisher** — a dialog may be waiting. After 3 minutes the tool stops automatically unless you raised the timeout |
+| “600powershell.exe” or “Cannot convert … ExportTimeoutSeconds” | Your `.bat` file has a typo — the timeout value is stuck to other text. Use one `powershell.exe` line with a space: `-ExportTimeoutSeconds 600` |
+| “GetRelativePath” error | Copy the latest `pub2pdf.ps1` from the project — you may have an older version |
+| PDFs saved in the wrong place | Check **`-OutputRoot`** in your `.bat` file points at a PDF folder, not the script folder |
 | Tool stops after many files | Run it again with `-Skip` — it will continue where it left off |
 
 ---
