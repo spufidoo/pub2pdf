@@ -283,9 +283,12 @@ You need a **free GitHub account** to raise an issue. If you do not have one, cl
 
 ## Appendix
 
-When I built this, my laptop didn't have a copy of Publisher to play with, so I used my wife's school laptop. It didn't have PowerShell v7, so
+When I built this, my laptop didn't have a copy of Publisher to play with, so I used my wife's school laptop. It didn't have PowerShell v7, so I installed it, created a Script folder and added it to my path.
 ```
 winget install --id Microsoft.PowerShell --source winget
+New-Item -Path "$HOME\Scripts" -ItemType Directory -Force
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$HOME\Scripts", "User")
+Copy-Item "$HOME\Downloads\pub2pdf.ps1" "$HOME\Scripts\"
 ```
 I wrote it using Notepad as it didn't have Emacs (rage-baiting any VS Code users here). It then complained that it wasn't digitally signed, so
 ```
