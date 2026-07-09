@@ -3,7 +3,16 @@
 Bulk-convert **Microsoft Publisher** files (`.pub`) to **PDF**. No coding required.
 
 Project page: [github.com/spufidoo/pub2pdf](https://github.com/spufidoo/pub2pdf)
+---
+## History
 
+Microsoft are withdrawing support for Publisher in October 2026. This means that every Publisher document (including "lesson plans") written by every teacher in every school in the United Kingdom since 1991 will be unavailable. Useless. Toast. Thank you Microsoft. <!-- Bastards --> 
+
+This is my contribution to the sanity of teacher staff everywhere.
+
+It automatically finds Publisher documents and converts them to PDFs. Hopefully Adobe won't withdraw support for PDFs any time soon.
+
+It's free. Try it out. If there is anything you can find that's wrong with it. Raise an issue or a pull request.
 ---
 
 ## What you need first
