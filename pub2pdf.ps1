@@ -15,7 +15,7 @@
     Bulk convert a folder tree:
 
         .\pub2pdf.ps1 `
-            -SourceRoot "C:\Users\User\Documents\Publisher" `
+            -SourceRoot "C:\Users\SimpsonB\Documents\Publisher" `
             -OutputRoot "C:\Temp\PubPDF"
 
     Test a single file:
