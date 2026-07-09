@@ -12,7 +12,8 @@ This is my contribution to the sanity of teacher staff everywhere.
 
 It automatically finds Publisher documents and converts them to PDFs. Hopefully Adobe won't withdraw support for PDFs any time soon.
 
-It's free. Try it out. If there is anything you can find that's wrong with it. Raise an issue or a pull request.
+It's free. Try it out. If there is anything you can find that's wrong with it. Raise an issue or a pull request. Either way, let me know.
+
 ---
 
 ## What you need first
