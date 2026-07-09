@@ -44,52 +44,17 @@ Windows may block files downloaded from the internet.
 
 ---
 
-## Step 3: Create a “Run” file (double-click to start)
+## Step 3: Edit the “Run” file (double-click to start)
 
 You will create a small helper file so you never have to type commands yourself.
 
 ### Easy option: use the template file
 
-If your download includes **`Convert my Publisher files.bat`**, you do not need to create one:
-
-1. Right-click the `.bat` file → **Edit** (or open it in Notepad)
+1. Right-click the `Convert my Publisher files.bat` file → **Edit** (or open it in Notepad)
 2. Change only the two folder paths at the top (`SOURCE` and `OUTPUT`)
 3. Save and close Notepad
 
-### Or create your own in Notepad
-
-1. Open **Notepad** (search for it in the Start menu)
-2. Copy **all** of the text inside the box below
-3. Paste it into Notepad
-4. Change the two folder paths on the lines that start with `-SourceRoot` and `-OutputRoot` to match **your** folders (see the example underneath)
-5. Click **File → Save As**
-6. Save in the **same folder** as `pub2pdf.ps1` (Documents → pub2pdf)
-7. Set **Save as type** to **All files**
-8. Name the file: **`Convert my Publisher files.bat`**
-9. Click **Save**
-
 **Important:** The `powershell.exe` line must be **one single line** in Notepad — do not split it across two lines unless you know batch files well.
-
-### Text to copy into Notepad
-
-```bat
-@echo off
-cd /d "%~dp0"
-
-REM === EDIT THESE TWO FOLDERS ===
-set "SOURCE=PUT YOUR PUBLISHER FOLDER HERE"
-set "OUTPUT=PUT YOUR PDF FOLDER HERE"
-
-REM Optional: seconds to wait for export (600 = 10 minutes). Remove this switch to use the default (180).
-set "TIMEOUT=600"
-
-powershell.exe -ExecutionPolicy Bypass -File "%~dp0pub2pdf.ps1" -SourceRoot "%SOURCE%" -OutputRoot "%OUTPUT%" -Skip -ExportTimeoutSeconds %TIMEOUT%
-
-echo.
-echo Finished. Press any key to close this window.
-pause >nul
-
-```
 
 ### Example paths
 
@@ -101,16 +66,22 @@ and you want PDFs here:
 
 `C:\Users\Jane\OneDrive - School\Year 3\PDFs`
 
-then your file should look like:
+then you should edit these lines:
 
 ```bat
-@echo off
-cd /d "%~dp0"
-powershell.exe -ExecutionPolicy Bypass -File "%~dp0pub2pdf.ps1" -SourceRoot "C:\Users\Jane\OneDrive - School\Year 3\Plans" -OutputRoot "C:\Users\Jane\OneDrive - School\Year 3\PDFs" -Skip
-echo.
-echo Finished. Press any key to close this window.
-pause >nul
+REM === EDIT THESE TWO FOLDERS ===
+set "SOURCE=C:\Users\Jane\OneDrive - School\Year 3\Plans"
+set "OUTPUT=C:\Users\Jane\OneDrive - School\Year 3\PDFs"
 ```
+### Another (Advanced) Example
+
+If you want your PDFs to be in the same folder as your PUBs, and you happen to have MANY Publisher documents, then copy the two programs to the top folder (e.g. Documents), edit the `Convert my Publisher files.bat` file by changing the following lines:
+```bat
+REM === EDIT THESE TWO FOLDERS ===
+set "SOURCE=."
+set "OUTPUT=."
+```
+This means "wherever you find a Publisher file, create a PDF of it along side it."
 
 **Tip:** To copy a folder path without typing it:
 
@@ -123,8 +94,6 @@ pause >nul
 
 - **`-SourceRoot`** = the folder that contains your `.pub` files
 - **`-OutputRoot`** = a **different** folder where you want the PDFs saved (for example, create a folder called `PDFs`). Do not use the same folder as the tool itself unless you deliberately want PDFs saved beside the script
-
-If you downloaded from GitHub, you may have a folder called `pub2pdf.ps1-main`. Keep `pub2pdf.ps1` and your `.bat` file there, but point **`-SourceRoot`** at the folder that actually contains your `.pub` files, and **`-OutputRoot`** at where you want PDFs to go.
 
 ---
 
@@ -145,12 +114,13 @@ Some workplaces stop scripts from running. You may see a red error about “exec
 
 **Try this first:** Step 3 already includes a fix (`-ExecutionPolicy Bypass`). If it still fails:
 
-1. Contact **IT support**
-2. Show them this file and ask them to either:
-   - Allow `pub2pdf.ps1` to run for your user account, or
-   - Run the tool once for you using the `.bat` file from Step 3
+1. Open a PowerShell window:
+   Click the Start button (bottom left of your Start bar), and start typing ``PowerShell``. Click Open.
+2. After the ``PS C:\Users\YourName>`` prompt, type
+   ``Set-ExecutionPolicy RemoteSigned -Scope CurrentUser``
+   and hit Enter.
 
-Do not change security settings yourself unless IT tells you to.
+If that doesn't work, ask your IT Support.
 
 ---
 
