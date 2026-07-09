@@ -17,22 +17,9 @@ Check all of these before you start:
 
 ## Step 1: Download the tool
 
-You only need **one file**: `pub2pdf.ps1`.
-
-### If someone sent you the file
-
-1. Save `pub2pdf.ps1` to a folder you can find easily, for example:  
-   **Documents → pub2pdf**
-
-### If you are downloading from GitHub
-
-1. Open the project page in your web browser (your colleague will give you the link).
-2. Click the green **Code** button near the top right.
-3. Click **Download ZIP**.
-4. Open your **Downloads** folder and double-click the ZIP file.
-5. Drag **`pub2pdf.ps1`** into **Documents → pub2pdf** (create the `pub2pdf` folder if it does not exist).
-
-You do **not** need to install GitHub or create an account.
+You only need **one file**: `pub2pdf.ps1`. You will find the file here (https://github.com/spufidoo/pub2pdf.ps1/blob/main/pub2pdf.ps1). Click on the download icon on the header bar to download it.
+<img width="905" height="51" alt="image" src="https://github.com/user-attachments/assets/f664e7d3-2028-4022-b17a-1f6367c1a907" />
+This will download it to your Downloads folder.
 
 ---
 
