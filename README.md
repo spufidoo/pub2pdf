@@ -28,17 +28,16 @@ It's free. Try it out. If there is anything you can find that's wrong with it. R
 
 ## Step 1: Download the tool
 
-1. Open [github.com/spufidoo/pub2pdf](https://github.com/spufidoo/pub2pdf) in your web browser.
-2. Click the green **Code** button (top right).
-3. Click **Download ZIP**.
-4. Open your **Downloads** folder and double-click the ZIP file.
-5. Copy these files into a folder you can find easily (for example **Documents → pub2pdf**):
+1. Open [github.com/spufidoo/pub2pdf/releases/latest](https://github.com/spufidoo/pub2pdf/releases/latest) in your web browser.
+2. Under **Assets**, click **`pub2pdf.zip`** to download.
+3. Open your **Downloads** folder and double-click the ZIP file.
+4. Copy these files into a folder you can find easily (for example **Documents → pub2pdf**):
    - `pub2pdf.ps1`
    - `Convert my Publisher files.bat`
 
 You do **not** need a GitHub account.
 
-If the ZIP creates a folder called `pub2pdf-main` or `pub2pdf.ps1-main`, open that folder — the files are inside it.
+The ZIP contains the files at the top level — no extra folder to dig into.
 
 ---
 
@@ -233,9 +232,9 @@ Ask IT or a colleague to change the `.bat` to use `-File` instead of `-SourceRoo
 | “Running scripts is disabled” | See [Step 4 (alternative)](#step-4-alternative-if-your-computer-blocks-the-tool) |
 | Tool stops after `TEMP` with no progress | Check the **taskbar for Publisher** — a dialog may be waiting; raise `TIMEOUT` if needed |
 | “600powershell.exe” or “Cannot convert … ExportTimeoutSeconds” | Typo in `.bat` — use the template above; `-ExportTimeoutSeconds 600` must be separate from other text |
-| “GetRelativePath” error | Download the latest `pub2pdf.ps1` from GitHub |
-| “Could not find file … PublisherConversion…log” | OneDrive blocked the log — use latest script; log path is shown as `Log : ...` (often in Temp) |
-| Export OK but “Could not find file … .pdf” on copy | OneDrive blocked the PDF — **Always keep on this device**, latest script, or use a local `OUTPUT` folder |
+| “GetRelativePath” error | Download the latest **`pub2pdf.zip`** from [releases/latest](https://github.com/spufidoo/pub2pdf/releases/latest) |
+| “Could not find file … PublisherConversion…log” | OneDrive blocked the log — download latest **`pub2pdf.zip`**; log path is shown as `Log : ...` (often in Temp) |
+| Export OK but “Could not find file … .pdf” on copy | OneDrive blocked the PDF — **Always keep on this device**, latest **`pub2pdf.zip`**, or use a local `OUTPUT` folder |
 | Tool stops after many files | Run again with `-Skip` — already-converted files are skipped |
 
 ---
