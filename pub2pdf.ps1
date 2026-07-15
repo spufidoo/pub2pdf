@@ -54,7 +54,10 @@
         [int]$RestartEvery = 50,
 
         # Stop waiting if PDF export takes longer than this (seconds). 0 = no timeout.
-        [int]$ExportTimeoutSeconds = 180
+        [int]$ExportTimeoutSeconds = 180,
+
+        # Optional callback for GUI progress (receives each log line as a string).
+        [scriptblock]$LogCallback
     )
 
     if ($Skip -and $Overwrite) {
@@ -159,6 +162,10 @@
 
         $line = "{0} {1}" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"), $Message
         Write-Host $line
+
+        if ($LogCallback) {
+            & $LogCallback $line
+        }
 
         if ($script:LogFile) {
             Add-Content -LiteralPath $script:LogFile -Value $line
