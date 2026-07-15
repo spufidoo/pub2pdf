@@ -32,11 +32,6 @@ $form.StartPosition = "CenterScreen"
 $form.MinimumSize = New-Object System.Drawing.Size(560, 460)
 $form.Font = New-Object System.Drawing.Font("Segoe UI", 10)
 
-$iconPath = Join-Path $ScriptDir "pub2pdf.ico"
-if (Test-Path -LiteralPath $iconPath) {
-    $form.Icon = New-Object System.Drawing.Icon($iconPath)
-}
-
 $intro = New-Object System.Windows.Forms.Label
 $intro.Location = New-Object System.Drawing.Point(16, 12)
 $intro.Size = New-Object System.Drawing.Size(590, 48)
