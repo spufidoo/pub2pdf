@@ -34,6 +34,8 @@ $RepoRoot = Split-Path -Parent $PSScriptRoot
 
 $ReleaseFiles = @(
     "pub2pdf.ps1",
+    "pub2pdf-gui.ps1",
+    "Convert Publisher to PDF.bat",
     "Convert my Publisher files.bat",
     "README.md"
 )
